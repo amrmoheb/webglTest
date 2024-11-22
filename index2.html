@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Unity WebGL Integration</title>
+    <!-- Include the Unity loader script -->
+    <script src="Build/buildV1.loader.js"></script>
+</head>
+<body>
+    <!-- Section for Unity WebGL Content -->
+    <div id="unity-container" style="width: 960px; height: 600px;"></div>
+
+    <!-- Buttons to interact with the Unity scene -->
+    <button onclick="changeColor()">Change Color</button>
+    <button onclick="spawnCube()">Spawn Cube</button>
+
+    <!-- Initialize Unity WebGL -->
+    <script>
+        // Create Unity instance and load the build files
+        var unityInstance = createUnityInstance(document.querySelector("#unity-container"), {
+            dataUrl: "Build/buildV1.data.br",
+            frameworkUrl: "Build/buildV1.framework.js.br",
+            codeUrl: "Build/buildV1.wasm.br",
+            streamingAssetsUrl: "StreamingAssets",
+            companyName: "YourCompany",
+            productName: "YourProduct",
+            productVersion: "1.0",
+        });
+
+        // JavaScript functions to communicate with Unity
+        function changeColor() {
+            unityInstance.SendMessage("GameObjectName", "OnEventReceived", "ChangeColor");
+        }
+
+        function spawnCube() {
+            unityInstance.SendMessage("GameObjectName", "OnEventReceived", "SpawnCube");
+        }
+    </script>
+</body>
+</html>
